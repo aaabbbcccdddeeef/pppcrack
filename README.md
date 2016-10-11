@@ -1,2 +1,1 @@
-# pppcrack
-PPP鎷ㄥ彿瀵嗙爜鏆村姏鐮磋В宸ュ叿
+PPP密码暴力破解工具
